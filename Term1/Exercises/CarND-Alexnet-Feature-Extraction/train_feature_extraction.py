@@ -48,7 +48,7 @@ accuracy_operation = tf.reduce_mean(tf.cast(tf.equal(predictions, labels), tf.fl
 
 def evaluate(X, y, sess):
 	total_accuracy = 0
-	for offset in (0, X.shape[0], batch_size):
+	for offset in range(0, X.shape[0], batch_size):
 		end = offset + batch_size
 		batch_x, batch_y = X[offset:end], y[offset:end]
 		accuracy = sess.run(accuracy_operation, feed_dict={features: batch_x, labels: batch_y})
