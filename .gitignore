@@ -4,3 +4,4 @@
 *.pickle
 *.npy
 *.app
+*.h5
