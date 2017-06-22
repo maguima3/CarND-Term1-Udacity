@@ -17,7 +17,7 @@ The goals / steps of this project are the following:
 [undistorted2]: ./output_images/undistorted2.png 
 [color_channels]: ./output_images/color_channels.png 
 [yellow_white_masks]: ./output_images/yellow_white_masks.png 
-[gradient_thesholds]: ./output_images/gradient_thesholds.png∫
+[gradient_thresholds]: ./output_images/gradient_thresholds.png
 [final_mask]: ./output_images/final_mask.png
 [warped]: ./output_images/warped.png
 [histogram]: ./output_images/histogram.png
@@ -71,7 +71,7 @@ The transformations I found more helpful for finding lane lines on images are:
 * Color masks (9th cell code): white and yellow color masks really help in detecting pixels of the images.
 ![alt text][yellow_white_masks]
 * Gradient thresholds (11th cell code): as lane lines tend to be close to vertical, the Sobel operator on the X axis is suitable for finding lane lines. More particularly, we are interested on lines with a particular orientation (lines usually have 30 or 120 degrees approximately) and applying a threshold on the direction of the gradient also seems to help in filtering out lane lines.
-![alt text][gradient_thesholds]
+![alt text][gradient_thresholds]
 
 After testing several combinations of transformations, I decided to apply color thresholds to identify the lane lines on the images: I use the R and S binary channels as well as the yellow and white color masks. I decided not to use gradient thresholds as they decreased the algorithm performance on the `project_video.mp4`. However, I believe that in situations with worst light conditions (like in the challenge videos), gradient thresholds will be really useful.
 
