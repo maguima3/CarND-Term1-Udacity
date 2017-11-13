@@ -43,7 +43,7 @@ VectorXd Tools::CalculateRMSE(const vector<VectorXd> &estimations,
 	return rmse;
 }
 
-void Tools::WriteResult(UKF::UKF ukf, MeasurementPackage::MeasurementPackage meas_package, VectorXd gt_values) {
+void Tools::WriteResult(UKF ukf, MeasurementPackage meas_package, VectorXd gt_values) {
 	//Defines output file, where all results will be saved
   std::ofstream out_file_(out_file_name_.c_str(), std::ofstream::out | ios::app);
   if (!out_file_.is_open()) {

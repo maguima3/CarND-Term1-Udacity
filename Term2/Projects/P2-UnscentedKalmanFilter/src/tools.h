@@ -30,7 +30,7 @@ public:
   /**
   * Writes result in output file
   */
-  void WriteResult(UKF::UKF ukf, MeasurementPackage::MeasurementPackage meas_package, VectorXd gt_values);
+  void WriteResult(UKF ukf, MeasurementPackage meas_package, VectorXd gt_values);
 
 };
 
