@@ -12,6 +12,9 @@ public:
     RADAR
   } sensor_type_;
 
+  //cointains measurement
+  //for lidar: px, py
+  //for radar: ro,theta, ro_dot
   Eigen::VectorXd raw_measurements_;
 
 };

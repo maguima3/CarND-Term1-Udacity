@@ -10,6 +10,7 @@ using namespace std;
 // for convenience
 using json = nlohmann::json;
 
+
 // Checks if the SocketIO event has JSON data.
 // If there is data the JSON object in string format will be returned,
 // else the empty string "" will be returned.
@@ -26,8 +27,7 @@ std::string hasData(std::string s) {
   return "";
 }
 
-int main()
-{
+int main() {
   uWS::Hub h;
 
   // Create a Kalman Filter instance
@@ -37,6 +37,7 @@ int main()
   Tools tools;
   vector<VectorXd> estimations;
   vector<VectorXd> ground_truth;
+
 
   h.onMessage([&ukf,&tools,&estimations,&ground_truth](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -121,6 +122,7 @@ int main()
           double v1 = cos(yaw)*v;
           double v2 = sin(yaw)*v;
 
+          // CTRV Motion model
           estimate(0) = p_x;
           estimate(1) = p_y;
           estimate(2) = v1;
@@ -129,6 +131,8 @@ int main()
           estimations.push_back(estimate);
 
           VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
+
+          tools.WriteResult(ukf, meas_package, gt_values);
 
           json msgJson;
           msgJson["estimate_x"] = p_x;

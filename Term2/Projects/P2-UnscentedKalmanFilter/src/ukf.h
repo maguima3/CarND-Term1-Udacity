@@ -31,6 +31,9 @@ public:
   ///* predicted sigma points matrix
   MatrixXd Xsig_pred_;
 
+  ///* augmented sigma points matrix
+  MatrixXd Xsig_aug_;
+
   ///* time when the state is true, in us
   long long time_us_;
 
@@ -67,6 +70,12 @@ public:
   ///* Sigma point spreading parameter
   double lambda_;
 
+  ///* NIS radar value
+  double NIS_radar_;
+
+  ///* NIS lidar value
+  double NIS_lidar_;
+
 
   /**
    * Constructor
@@ -102,6 +111,17 @@ public:
    * @param meas_package The measurement at k+1
    */
   void UpdateRadar(MeasurementPackage meas_package);
+
+private:
+  void Initialization(MeasurementPackage meas_package);
+  //useful functions from the lessosns..
+  void AugmentedSigmaPointsGeneration();
+  void SigmaPointPrediction(double delta_t); //modifies Xsig_pred_
+  void PredictMeanAndCovariance(); //modifies x_ and P_
+  void PredictRadarMeasurement(VectorXd* z_out, MatrixXd* S_out, MatrixXd* Zsig_out);
+  void UpdateStateRadar(VectorXd z_pred, MatrixXd S, MatrixXd Zsig, VectorXd z);
+  void PredictLidarMeasurement(VectorXd* z_out, MatrixXd* S_out, MatrixXd* Zsig_out);
+  void UpdateStateLidar(VectorXd z_pred, MatrixXd S, MatrixXd Zsig, VectorXd z);
 };
 
 #endif /* UKF_H */
