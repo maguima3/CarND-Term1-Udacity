@@ -1,53 +1,67 @@
-#**Finding Lane Lines on the Road** 
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+# Finding Lane Lines on the Road
 
-<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
+### Reflection
 
-Overview
+In this section, I describe the steps performed by `find_lanes_pipeline` function to dentify and draw the lane lines on images and videos (which are just a serie of images).
+
+
+#### Context of the test images
+* Images are taken from a front facing camera mounted in a fixed position on the car, such that the lane lines always appear in the same general region of the image. Approximately, the center of the lane lines is located at the center of the images.
+* Images show good visibility and light conditions.
+* Lane lines vary in colour (white or yellow) and length (continuos or discontinuos). 
+* Other cars do not cross the lane lines in any moment.
+
+#### Pipeline description
+Below, I describe the steps necessary to identify and draw the lane lines on a picture. As an example, I use an image of a solid white curve lane.
+![alt text][start]
+* First, it is necessary to convert the image to grayscale [`grayscale`].
+![alt text][gray]
+* Use the Canny algorithm to detect edges. Along with the previous grayscale image, it is also necessary to define a low and hight threshold values, which determine the pixels that are labeled as edges on the imsge. In this project, I've chosen a 1:3 low to hight ratio, being the lower and threshold 50 and 150 resoectivly [`canny`].
+![alt text][edges]
+* The next step is to detect the lane lines from the edges of the images. To obtain an accuarate result, it is first necessary to filter out the edges in other areas of the image (e.g trees, other cars, etc) that may introduce noise. I've accomplished it using a quadrilateral region of interest mask, which borders the region where lane lines appear. Everything else outside this regios is wiped out [`region_of_interest`]. 
+![alt text][mask]
+* Next, the Hough Transform is applied on the filtered edge-detected image to detect the segments present on the image [`hough_lines`]. To identify the lane lines, some steps more are needed [`draw_lines`]:
+    * Separate line segments by their slope to decide which segments are part of the left line vs. the right line. At first, I only considered the sign of the slope: segments with positive slope were part of the left lane, and segments with negaive slope of the right lane. To make the algorithm more robust, I added another restriction: segments of lane lines must be inclined. I defined that the minumum slope that segments must have is 0.5.
+    * Separate line segments by their location: segments of the right line are located on the right half side of the image, and segments of the left line on tft side.  
+    * Finally, I use the line segments to extrapolate the full extent of the lines.
+    ![alt text][lines]
+* The last step consists on drawing the detected lane lines on the initial image [`weighted_img`].
+![alt text][end]
+
+[//]: # (Image References)
+
+[start]: ./test_images/solidWhiteCurve.jpg "Initial image: Solid White Curve"
+[gray]: ./examples/solidWhiteCurve_grayscale.jpg "Gray scale"
+[edges]: ./examples/solidWhiteCurve_edges.jpg "Edges"
+[mask]: ./examples/solidWhiteCurve_mask.jpg "Mask"
+[lines]: ./examples/solidWhiteCurve_lines.jpg "Detected lane lines"
+[end]: ./examples/solidWhiteCurve_end.jpg "Result"
+
 ---
 
-When we drive, we use our eyes to decide where to go.  The lines on the road that show us where the lanes are act as our constant reference for where to steer the vehicle.  Naturally, one of the first things we would like to do in developing a self-driving car is to automatically detect lane lines using an algorithm.
+###  Submission Videos
 
-In this project you will detect lane lines in images using Python and OpenCV.  OpenCV means "Open-Source Computer Vision", which is a package that has many useful tools for analyzing images.  
-
-To complete the project, two files will be submitted: a file containing project code and a file containing a brief write up explaining your solution. We have included template files to be used both for the [code](https://github.com/udacity/CarND-LaneLines-P1/blob/master/P1.ipynb) and the [writeup](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md).The code file is called P1.ipynb and the writeup template is writeup_template.md 
-
-To meet specifications in the project, take a look at the requirements in the [project rubric](https://review.udacity.com/#!/rubrics/322/view)
+1. Finding lane lines: solid white lines
+[![Solid white lines](https://youtu.be/M_dnxvHdv6A.png)](https://youtu.be/M_dnxvHdv6A "Solid white lines - Click to Watch!")
 
 
-Creating a Great Writeup
----
-For this project, a great writeup should provide a detailed response to the "Reflection" section of the [project rubric](https://review.udacity.com/#!/rubrics/322/view). There are three parts to the reflection:
+2. Finding lane lines: solid yellow left
+[![Solid yellow left](https://youtu.be/q3Dp-TF8yYs.png)](https://youtu.be/q3Dp-TF8yYs "Solid yellow left - Click to Watch!")
 
-1. Describe the pipeline
-
-2. Identify any shortcomings
-
-3. Suggest possible improvements
-
-We encourage using images in your writeup to demonstrate how your pipeline works.  
-
-All that said, please be concise!  We're not looking for you to write a book here: just a brief description.
-
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup. Here is a link to a [writeup template file](https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md). 
+3. Challenge
+[![Challenge](https://youtu.be/YwUlD8wuwM4.png)](https://youtu.be/YwUlD8wuwM4 "Challenge - Click to Watch!")
 
 
-The Project
 ---
 
-## If you have already installed the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) you should be good to go!   If not, you should install the starter kit to get started on this project. ##
+###  Shortcomings
+Some potential shortcoming would be:
+* Images must be taken from a front facing camera mounted in a fixed position on the car, such that the lane lines always appear in the same central general region of the image. If not, the region of interest mask used to filter out everything but the lane lines could wipe out the lanes.
+* Cars crossing the lane lines.
+* Sharp curves, as lane lines are extrapolated from the line segments using a linear function.
 
-**Step 1:** Set up the [CarND Term1 Starter Kit](https://classroom.udacity.com/nanodegrees/nd013/parts/fbf77062-5703-404e-b60c-95b78b2f3f9e/modules/83ec35ee-1e02-48a5-bdb7-d244bd47c2dc/lessons/8c82408b-a217-4d09-b81d-1bda4c6380ef/concepts/4f1870e0-3849-43e4-b670-12e6f2d4b7a7) if you haven't already.
+---
 
-**Step 2:** Open the code in a Jupyter Notebook
+### Improvements
 
-You will complete the project code in a Jupyter notebook.  If you are unfamiliar with Jupyter Notebooks, check out <A HREF="https://www.packtpub.com/books/content/basics-jupyter-notebook-and-python" target="_blank">Cyrille Rossant's Basics of Jupyter Notebook and Python</A> to get started.
-
-Jupyter is an Ipython notebook where you can run blocks of code and see results interactively.  All the code for this project is contained in a Jupyter notebook. To start Jupyter in your browser, use terminal to navigate to your project directory and then run the following command at the terminal prompt (be sure you've activated your Python 3 carnd-term1 environment as described in the [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) installation instructions!):
-
-`> jupyter notebook`
-
-A browser window will appear showing the contents of the current directory.  Click on the file called "P1.ipynb".  Another browser window will appear displaying the notebook.  Follow the instructions in the notebook to complete the project.  
-
-**Step 3:** Complete the project and submit both the Ipython notebook and the project writeup
-
+* A possible improvement for videos would be to consider the position of the lane lines in the previous image to make better predictions.
