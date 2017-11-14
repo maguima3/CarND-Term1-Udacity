@@ -42,14 +42,14 @@ Below, I describe the steps necessary to identify and draw the lane lines on a p
 ###  Submission Videos
 
 1. Finding lane lines: solid white lines
-[![Solid white lines](http://img.youtube.com/vi/M_dnxvHdv6A/0.png)](https://youtu.be/M_dnxvHdv6A "Solid white lines - Click to Watch!")
+[![Solid white lines](http://img.youtube.com/vi/M_dnxvHdv6A/0.jpg)](https://youtu.be/M_dnxvHdv6A "Solid white lines - Click to Watch!")
 
 
 2. Finding lane lines: solid yellow left
-[![Solid yellow left](http://img.youtube.com/vi/q3Dp-TF8yYs/0.png)](https://youtu.be/q3Dp-TF8yYs "Solid yellow left - Click to Watch!")
+[![Solid yellow left](http://img.youtube.com/vi/q3Dp-TF8yYs/0.jpg)](https://youtu.be/q3Dp-TF8yYs "Solid yellow left - Click to Watch!")
 
 3. Challenge
-[![Challenge](http://img.youtube.com/vi/YwUlD8wuwM4/0.png)](https://youtu.be/YwUlD8wuwM4 "Challenge - Click to Watch!")
+[![Challenge](http://img.youtube.com/vi/YwUlD8wuwM4/0.jpg)](https://youtu.be/YwUlD8wuwM4 "Challenge - Click to Watch!")
 
 
 ---
