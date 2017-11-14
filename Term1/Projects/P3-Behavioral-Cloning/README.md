@@ -61,7 +61,7 @@ My network consists of 9 layers: 1 lambda layer to normalize the data, 5 convolu
 The table bellow shows the architecture of the CNN in detail:
 
 | Layer | Description|
-| :---: | | :---: |
+| :--- | :--- |
 | Input | 3@66x200|
 | Convolution | kernel: 5x5, stride: 2x2, output: 24@31x98|
 | Convolution | kernel: 5x5, stride: 2x2, output: 36@14x47|
@@ -72,6 +72,7 @@ The table bellow shows the architecture of the CNN in detail:
 | Fully Connected | output: 100|
 | Fully Connected | output: 50|
 | Output | output: 1|
+
 
 Before entering in the network, images caputred by the front cameras are preprocessed (model.py function ``preprocess_input``):
 
