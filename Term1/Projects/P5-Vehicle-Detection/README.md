@@ -162,6 +162,13 @@ I filter out false positives by determining which detections appear in one frame
 
 ---
 
+###  Submission Video
+
+[![Vehicle Detection](http://img.youtube.com/vi/3FxIi_PnrIY/0.jpg)](https://youtu.be/3FxIi_PnrIY "ehicle Detection - Click to Watch!")
+
+
+---
+
 ### Discussion
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
