@@ -149,3 +149,10 @@ I also recorded the vehicle driving along sharp curves, to improve its behavior:
 ![alt text][curv-3]
 
 In the validation set, I just include images recorded from the center camera, and I do not perform any data augmentation process. The validation accuracy helps me determine the behavior the vehicle will have on the track.
+
+
+---
+
+###  Submission Video
+
+[![Behavioral Cloning](http://img.youtube.com/vi/UPazC7RrNDo/0.jpg)](https://youtu.be/UPazC7RrNDo "Behavioral Cloning - Click to Watch!")
