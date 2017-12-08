@@ -1,6 +1,12 @@
 # Overview
 This repository contains all the code needed to complete the final project for the Localization course in Udacity's Self-Driving Car Nanodegree.
 
+
+###  Submission Video
+
+[![ParticleFilter](http://img.youtube.com/vi/https://youtu.be/Mbg6Ke15YHw/0.jpg)](https://youtu.be/https://youtu.be/Mbg6Ke15YHw "Particle Filter - Click to Watch!")
+
+
 #### Submission
 All you will submit is your completed version of `particle_filter.cpp`, which is located in the `src` directory. You should probably do a `git pull` before submitting to verify that your project passes the most up-to-date version of the grading code (there are some parameters in `src/main.cpp` which govern the requirements on accuracy and run time.)
 
