@@ -22,7 +22,7 @@ and a measured process variable (PV) and applies a correction based on proportio
 In this particular project, the error value (CTE) is provided directly to the controller.
 The block diagram shows the principles of how the three terms are generated and applied.
 
-![alt text](https://en.wikipedia.org/wiki/PID_controller#/media/File:PID_en.svg "PID controller block diagram")
+![alt text](https://radhesh.files.wordpress.com/2008/05/pid.jpg "PID controller block diagram")
 
 * The proportional term considers how far PV is from SP at any instant in time.
 Its contribution to the controller output signal is based on the size of e(t) only at time t.
